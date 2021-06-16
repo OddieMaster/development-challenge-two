@@ -1,29 +1,22 @@
 import React, { useState } from "react";
 import Cards from "../../components/Cards";
 import NavBar from "../../components/NavBar";
-import { Container, Grid } from "@material-ui/core";
+import Form from "../../components/Form";
+import { Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   cards: {
     margin: "40px 0;",
   },
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    width: "100%",
-    height: "100%",
-    minHeight: "0px;",
-    minWidth: "0px;",
-    maxHeight: "none;",
-    maxWidth: "none;",
-    margin: "0px;",
-    padding: "0px",
-    paddingTop: "300px;",
-    [theme.breakpoints.down("376")]: {
-      paddingTop: "200px;",
-      width: "100%",
-    height: "100%",
+  text: {
+    fontFamily: "'Dosis', sans-serif",
+  },
+
+  box: {
+    marginTop: theme.spacing(20),
+    [theme.breakpoints.down("769")]: {
+      marginTop: theme.spacing(15),
     },
   },
 }));
@@ -41,35 +34,52 @@ function HomePage() {
       <NavBar addControl={addControl} />
       {value === 1 && (
         <>
-          <Container className={classes.container}>
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={3}
-            >
-              <Grid item xs={3} sm={12}>
-                <Cards className={classes.cards} />
-              </Grid>
-              <Grid item xs={3} sm={12}>
-                <Cards className={classes.cards} />
-              </Grid>
-              <Grid item xs={3} sm={12}>
-                <Cards className={classes.cards} />
-              </Grid>
+          <Box className={classes.box} />
+
+          <Typography
+            className={classes.text}
+            variant="h1"
+            color="primary"
+            align="center"
+            gutterBottom
+          >
+            Patient Control
+          </Typography>
+          <Box mt={7} />
+          <Typography
+            className={classes.text}
+            variant="h2"
+            align="center"
+            color="textSecondary"
+            gutterBottom
+          >
+            Insert and Consult Medclean's Patients on the menu, more info about
+            us bellow.
+          </Typography>
+          <Box mt={7} />
+          <Grid container spacing={2} justify="center">
+            <Grid item xs={"auto"} sm={"auto"}>
+              <Cards className={classes.cards} />
             </Grid>
-          </Container>
+            <Grid item xs={"auto"} sm={"auto"}>
+              <Cards className={classes.cards} />
+            </Grid>
+            <Grid item xs={"auto"} sm={"auto"}>
+              <Cards className={classes.cards} />
+            </Grid>
+          </Grid>
         </>
       )}
       {value === 2 && (
         <>
-          <Container className={classes.container}>teste AQui</Container>
+          <Box mt={25} />
+          biiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiifghfghfghfghfghfghfghfgh
         </>
       )}
       {value === 3 && (
         <>
-          <Container className={classes.container}>teste AQui2</Container>
+          <Box  className={classes.box} />
+          <Form />
         </>
       )}
     </>
