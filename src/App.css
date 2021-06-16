@@ -9,11 +9,15 @@ html {
 }
 
 body {
-  background-color: lightblue;
-  /* background-image: 
-    url("./assets/medClean.png");
+  background-color: black;
+  background-image: linear-gradient(
+    to top,
+      transparent 50%,
+      rgba(0, 0, 0, 1) 100%
+    ),
+    url("./assets/background.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 100% 100%;
-  background-size: 100% 100%; */
+  background-size: 100% 100%;
 }

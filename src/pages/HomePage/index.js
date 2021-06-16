@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Cards from "../../components/Cards";
 import NavBar from "../../components/NavBar";
 import Form from "../../components/Form";
+import Consult from "../../components/Consult";
 import { Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -11,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     fontFamily: "'Dosis', sans-serif",
+    color: "white",
   },
 
   box: {
@@ -69,16 +71,16 @@ function HomePage() {
             </Grid>
           </Grid>
         </>
-      )}
+      )} 
       {value === 2 && (
         <>
           <Box mt={25} />
-          biiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiifghfghfghfghfghfghfghfgh
+          <Consult />
         </>
       )}
       {value === 3 && (
         <>
-          <Box  className={classes.box} />
+          <Box className={classes.box} />
           <Form />
         </>
       )}
