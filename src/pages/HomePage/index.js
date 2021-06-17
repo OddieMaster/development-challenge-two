@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Cards from "../../components/Cards";
 import NavBar from "../../components/NavBar";
 import Form from "../../components/Form";
-import Consult from "../../components/Consult";
 import { Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -55,8 +54,7 @@ function HomePage() {
             color="textSecondary"
             gutterBottom
           >
-            Insert and Consult Medclean's Patients on the menu, more info about
-            us bellow.
+           Manage your patient's info above on the menu, more about us bellow.
           </Typography>
           <Box mt={7} />
           <Grid container spacing={2} justify="center">
@@ -74,8 +72,7 @@ function HomePage() {
       )} 
       {value === 2 && (
         <>
-          <Box mt={25} />
-          <Consult />
+          <Box mt={25} />        
         </>
       )}
       {value === 3 && (
