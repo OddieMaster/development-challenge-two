@@ -1,12 +1,30 @@
-import React from 'react';
-import NavBar from '../../components/NavBar';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Paper, Box } from "@material-ui/core";
 
-// import { Container } from './styles';
+const useStyles = makeStyles((theme) => ({
+  grid: {},
+  box: {
+    backgroundColor: "black",
+    marginTop: theme.spacing(20),
+    [theme.breakpoints.down("769")]: {
+      marginTop: theme.spacing(15),
+    },
+  },
+}));
 
 function Consult() {
-  return <>
-  <NavBar />
-  </>;
+  const classes = useStyles();
+  return (
+    <>
+      <Box className={classes.box} />
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>xs=12</Paper>
+        </Grid>
+      </Grid>
+    </>
+  );
 }
 
 export default Consult;

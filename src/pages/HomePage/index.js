@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Cards from "../../components/Cards";
-import NavBar from "../../components/NavBar";
-import Form from "../../components/Form";
 import { Box, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -24,63 +22,42 @@ const useStyles = makeStyles((theme) => ({
 
 function HomePage() {
   const classes = useStyles();
-  const [value, setValue] = useState(1);
 
-  function addControl(value) {
-    setValue(value);
-    console.log(value);
-  }
   return (
     <>
-      <NavBar addControl={addControl} />
-      {value === 1 && (
-        <>
-          <Box className={classes.box} />
+      <Box className={classes.box} />
 
-          <Typography
-            className={classes.text}
-            variant="h1"
-            color="primary"
-            align="center"
-            gutterBottom
-          >
-            Patient Control
-          </Typography>
-          <Box mt={7} />
-          <Typography
-            className={classes.text}
-            variant="h2"
-            align="center"
-            color="textSecondary"
-            gutterBottom
-          >
-           Manage your patient's info above on the menu, more about us bellow.
-          </Typography>
-          <Box mt={7} />
-          <Grid container spacing={2} justify="center">
-            <Grid item xs={"auto"} sm={"auto"}>
-              <Cards className={classes.cards} />
-            </Grid>
-            <Grid item xs={"auto"} sm={"auto"}>
-              <Cards className={classes.cards} />
-            </Grid>
-            <Grid item xs={"auto"} sm={"auto"}>
-              <Cards className={classes.cards} />
-            </Grid>
-          </Grid>
-        </>
-      )} 
-      {value === 2 && (
-        <>
-          <Box mt={25} />        
-        </>
-      )}
-      {value === 3 && (
-        <>
-          <Box className={classes.box} />
-          <Form />
-        </>
-      )}
+      <Typography
+        className={classes.text}
+        variant="h1"
+        color="primary"
+        align="center"
+        gutterBottom
+      >
+        Patient Control
+      </Typography>
+      <Box mt={7} />
+      <Typography
+        className={classes.text}
+        variant="h2"
+        align="center"
+        color="textSecondary"
+        gutterBottom
+      >
+        Manage your patient's info above on the menu, more about us bellow.
+      </Typography>
+      <Box mt={7} />
+      <Grid container spacing={2} justify="center">
+        <Grid item xs={"auto"} sm={"auto"}>
+          <Cards className={classes.cards} />
+        </Grid>
+        <Grid item xs={"auto"} sm={"auto"}>
+          <Cards className={classes.cards} />
+        </Grid>
+        <Grid item xs={"auto"} sm={"auto"}>
+          <Cards className={classes.cards} />
+        </Grid>
+      </Grid>
     </>
   );
 }
