@@ -169,27 +169,27 @@ function NavBar(props) {
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link href="/" className={classes.text} underline="none">
+                  <Link href="http://localhost:3000/consult" className={classes.text} underline="none">
                     Consult Patient
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link href="/" className={classes.text} underline="none">
+                  <Link href="http://localhost:3000/edit" className={classes.text} underline="none">
                     Edit Patient
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link href="/" className={classes.text} underline="none">
+                  <Link href="http://localhost:3000/insert" className={classes.text} underline="none">
                     Insert Patient
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link href="/" className={classes.text} underline="none">
+                  <Link href="http://localhost:3000/delete" className={classes.text} underline="none">
                     Delete Patient
                   </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link href="/" className={classes.text} underline="none">
+                  <Link href="https://www.medclean.com.br/" className={classes.text} underline="none">
                     More About Us
                   </Link>
                 </MenuItem>
