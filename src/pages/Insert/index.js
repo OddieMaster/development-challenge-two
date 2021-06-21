@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -15,7 +15,7 @@ import {
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import IndeterminateCheckBoxIcon from "@material-ui/icons/IndeterminateCheckBox";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 
 const useStyles = makeStyles((theme) => ({
   initialBox: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   grid: {
-    background: "rgb(248,248,255, 0.1)" /* "rgba(0,0,0,0.6)" */,
+    background: "rgb(248,248,255, 0.1)",
     padding: "15px",
     margin: "15px",
     minHeight: "48vh",
@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "22px",
     fontWeight: "700",
     color: "#6a6a6a",
-    /*  backgroundColor: "orange", */
     letterSpacing: ".5px",
   },
   container: {
@@ -58,8 +57,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   gridItem: {
-    background: "rgb(255,255,255,0.97)" /* "rgba(0,0,0,0.6)" */,
-    padding: "40px 80% 40px 40px",
+    background: "rgb(255,255,255,0.97)",
+    padding: "20px !important",
     marginBottom: "20px",
     boxShadow:
       "0px 1px 3px 0px rgb(0 0 0 / 25%), 0px 1px 1px 0px rgb(0 0 0 / 18%), 0px 2px 1px -1px rgb(0 0 0 / 14%)",
@@ -118,12 +117,11 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       flexDirection: "column",
     },
-    
   },
   gridItens: {
     width: "100%",
     display: "flex",
-    flexDirection: "column",  
+    flexDirection: "column",
   },
 
   form: {
@@ -139,8 +137,12 @@ function Insert() {
   const [PatientForm, setPatientForm] = useState(0);
   const [AddressForm, setAddressForm] = useState(0);
   const [ExamForm, setExamForm] = useState(0);
+  const [PatientIcon, setPatientIcon] = useState(0);
+  const [AddressIcon, setAddressIcon] = useState(0);
+  const [ExamIcon, setExamIcon] = useState(0);
   const [Doctor, setDoctor] = useState("");
-  const { handleSubmit, register, errors } = useForm({});
+  const [Exam, setExam] = useState("");
+  const { handleSubmit, register, control, errors } = useForm({});
 
   var today = new Date();
   today.setDate(today.getDate());
@@ -151,6 +153,9 @@ function Insert() {
   const handleChange = (event) => {
     setDoctor(event.target.value);
   };
+  const handleChangeExam = (event) => {
+    setExam(event.target.value);
+  };
   const handlePatientForm = (value) => {
     setPatientForm(value);
   };
@@ -160,12 +165,49 @@ function Insert() {
   const handleExamForm = (value) => {
     setExamForm(value);
   };
+  const callNext = (value) => {
+    switch (value) {
+      case 1:
+        setPatientForm(0);
+        setAddressForm(1);
+        setPatientIcon(1);
+        break;
+      case 2:
+        setAddressForm(0);
+        setExamForm(1);
+        setAddressIcon(1);
+        break;
+      case 3:
+        setExamForm(0);
+        setExamIcon(1);
+
+        break;
+      default:
+      // do nothing
+    }
+  };
 
   function onSubmit(formData) {
     console.log(formData);
   }
+  const useRef = React.useRef(true)
 
-  console.log(PatientForm);
+ 
+     
+  useEffect(()=> {
+   if (useRef.current){
+     useRef.current = false;
+   } else if (errors.patient  || errors.cellphone || errors.cpf || errors.rg || errors.email || errors.bdate){
+     setPatientForm(1) 
+     setPatientIcon(0)    
+   } else if (errors.street || errors.residencialNumber || errors.residentialArea || errors.city || errors.state ) {
+     setAddressForm(1)
+     setAddressIcon(0)
+   } else if (errors.resquetedBy || errors.agreement || errors.nextAppointment || errors.doctor || errors.exam) {
+     setExamForm(1)
+     setExamIcon(0)
+   }
+  }, [errors])
   return (
     <>
       <Box className={classes.initialBox} />
@@ -177,11 +219,22 @@ function Insert() {
             className={classes.container}
           >
             <span className={classes.text}>Patient</span>
-
-            <CheckCircleIcon
-              className={classes.icon}
-              style={{ color: "#13ce8b" }}
-            />
+            {PatientIcon === 0 && (
+              <>
+                <IndeterminateCheckBoxIcon
+                  className={classes.icon}
+                  color="secondary"
+                />
+              </>
+            )}
+            {PatientIcon === 1 && (
+              <>
+                <CheckCircleIcon
+                  className={classes.icon}
+                  style={{ color: "#13ce8b" }}
+                />
+              </>
+            )}
 
             <IconButton
               className={classes.iconDown}
@@ -225,15 +278,21 @@ function Insert() {
                       })}
                     />
                     {errors.patient && errors.patient.type === "required" && (
-                      <p className={classes.error}>Invalid Name</p>
+                      <>
+                        <p className={classes.error}>Invalid Name</p>
+                      </>
                     )}
                     {errors.patient && errors.patient.type === "minLength" && (
-                      <p className={classes.error}>
-                        This field required min lenght of 5
-                      </p>
+                      <>
+                        <p className={classes.error}>
+                          This field required min lenght of 5
+                        </p>
+                      </>
                     )}
                     {errors.patient && errors.patient.type === "maxLength" && (
-                      <p className={classes.error}>Max length exceeded</p>
+                      <>
+                        <p className={classes.error}>Max length exceeded</p>
+                      </>
                     )}
                   </Grid>
                   <Grid item className={classes.gridItens}>
@@ -250,20 +309,23 @@ function Insert() {
                         maxLength: 10,
                       })}
                     />
-                    {errors.cellphone &&
-                      errors.cellphone.type === "required" && (
+                    {errors.cellphone && errors.cellphone.type === "required" && (
+                      <>
                         <p className={classes.error}>Invalid Cellphone</p>
-                      )}
-                    {errors.cellphone &&
-                      errors.cellphone.type === "minLength" && (
+                      </>
+                    )}
+                    {errors.cellphone && errors.cellphone.type === "minLength" && (
+                      <>
                         <p className={classes.error}>
                           This field required min lenght of 8
                         </p>
-                      )}
-                    {errors.cellphone &&
-                      errors.cellphone.type === "maxLength" && (
-                        <p className={classes.error}>Max length exceeded</p>
-                      )}
+                      </>
+                    )}
+                    {errors.cellphone && errors.cellphone.type === "maxLength" && (
+                      <>
+                        <p className={classes.error}>Max length exceeded</p>                        
+                      </>
+                    )}
                   </Grid>
                   <Grid item className={classes.gridItens}>
                     <TextField
@@ -279,10 +341,14 @@ function Insert() {
                       })}
                     />
                     {errors.cpf && errors.cpf.type === "required" && (
-                      <p className={classes.error}>Invalid CPF</p>
+                      <>
+                        <p className={classes.error}>Invalid CPF</p>
+                      </>
                     )}
                     {errors.cpf && errors.cpf.type === "minLength" && (
-                      <p className={classes.error}>Invalid CPF type</p>
+                      <>
+                        <p className={classes.error}>Invalid CPF type</p>
+                      </>
                     )}
                   </Grid>
                   <Grid item className={classes.gridItens}>
@@ -299,12 +365,16 @@ function Insert() {
                       })}
                     />
                     {errors.rg && errors.rg.type === "required" && (
-                      <p className={classes.error}>Invalid RG</p>
+                      <>
+                        <p className={classes.error}>Invalid RG</p>
+                      </>
                     )}
                     {errors.rg && errors.rg.type === "minLength" && (
-                      <p className={classes.error}>
-                        This field required min lenght of 8
-                      </p>
+                      <>
+                        <p className={classes.error}>
+                          This field required min lenght of 8
+                        </p>
+                      </>
                     )}
                   </Grid>
                   <Grid item className={classes.gridItens}>
@@ -321,12 +391,16 @@ function Insert() {
                       })}
                     />
                     {errors.email && errors.email.type === "required" && (
-                      <p className={classes.error}>Invalid E-mail</p>
+                      <>
+                        <p className={classes.error}>Invalid E-mail</p>
+                      </>
                     )}
                     {errors.email && errors.email.type === "minLength" && (
-                      <p className={classes.error}>
-                        This field required min lenght of 5
-                      </p>
+                      <>
+                        <p className={classes.error}>
+                          This field required min lenght of 5
+                        </p>
+                      </>
                     )}
                   </Grid>
                   <Grid item className={classes.gridItens}>
@@ -346,7 +420,9 @@ function Insert() {
                       })}
                     />
                     {errors.bdate && errors.bdate.type === "required" && (
-                      <p className={classes.error}>Invalid Date</p>
+                      <>
+                        <p className={classes.error}>Invalid Date</p>
+                      </>
                     )}
                   </Grid>
                 </Grid>
@@ -355,9 +431,9 @@ function Insert() {
                   color="primary"
                   className={classes.button}
                   style={{ marginTop: "15px" }}
-                  onClick={() => handlePatientForm(0)}
+                  onClick={() => callNext(1)}
                 >
-                  Save and Continue
+                  Next
                 </Button>
               </form>
             </Box>
@@ -371,10 +447,22 @@ function Insert() {
           >
             <span className={classes.text}>Address</span>
 
-            <IndeterminateCheckBoxIcon
-              className={classes.icon}
-              color="secondary"
-            />
+            {AddressIcon === 0 && (
+              <>
+                <IndeterminateCheckBoxIcon
+                  className={classes.icon}
+                  color="secondary"
+                />
+              </>
+            )}
+            {AddressIcon === 1 && (
+              <>
+                <CheckCircleIcon
+                  className={classes.icon}
+                  style={{ color: "#13ce8b" }}
+                />
+              </>
+            )}
             <IconButton
               className={classes.iconDown}
               color="primary"
@@ -523,7 +611,7 @@ function Insert() {
                       variant="outlined"
                       inputRef={register({
                         required: true,
-                        minLength: 3,
+                        minLength: 1,
                         maxLength: 30,
                       })}
                     />
@@ -532,7 +620,7 @@ function Insert() {
                     )}
                     {errors.state && errors.state.type === "minLength" && (
                       <p className={classes.error}>
-                        This field required min lenght of 3
+                        This field required min lenght of 1
                       </p>
                     )}
                     {errors.state && errors.state.type === "maxLength" && (
@@ -545,9 +633,9 @@ function Insert() {
                   color="primary"
                   className={classes.button}
                   style={{ marginTop: "15px" }}
-                  type="submit"
+                  onClick={() => callNext(2)}
                 >
-                  Save and Continue
+                  Next
                 </Button>
               </form>
             </Box>
@@ -561,10 +649,22 @@ function Insert() {
           >
             <span className={classes.text}>Exam Information</span>
 
-            <IndeterminateCheckBoxIcon
-              className={classes.icon}
-              color="secondary"
-            />
+            {ExamIcon === 0 && (
+              <>
+                <IndeterminateCheckBoxIcon
+                  className={classes.icon}
+                  color="secondary"
+                />
+              </>
+            )}
+            {ExamIcon === 1 && (
+              <>
+                <CheckCircleIcon
+                  className={classes.icon}
+                  style={{ color: "#13ce8b" }}
+                />
+              </>
+            )}
             <IconButton
               className={classes.iconDown}
               color="primary"
@@ -712,51 +812,56 @@ function Insert() {
                       className={classes.formControl}
                     >
                       <InputLabel>Doctor</InputLabel>
-                      <Select
+                      <Controller
+                        as={
+                          <Select name="doctor" label="Doctor" defaultValue="">
+                            <MenuItem value={"Guilherme"}>Guilherme</MenuItem>
+                            <MenuItem value={"Jéssica"}>Jéssica</MenuItem>
+                            <MenuItem value={"Vitor"}>Vitor</MenuItem>
+                          </Select>
+                        }
                         name="doctor"
+                        control={control}
+                        defaultValue=""
                         value={Doctor}
                         onChange={handleChange}
-                        label="Doctor"
-                        inputRef={register({
-                          required: true,
-                        })}
-                      >
-                        <MenuItem value={10}>Guilherme</MenuItem>
-                        <MenuItem value={20}>Jéssica</MenuItem>
-                        <MenuItem value={30}>Vitor</MenuItem>
-                      </Select>
+                        rules={{ required: true }}
+                      />
                     </FormControl>
                     {errors.doctor && errors.doctor.type === "required" && (
                       <p className={classes.error}>Need to insert a Doctor</p>
                     )}
                   </Grid>
+
                   <Grid item className={classes.gridItens}>
                     <FormControl
                       variant="outlined"
                       className={classes.formControl}
                     >
-                      <InputLabel>Exam </InputLabel>
-                      <Select
-                        name="examType"
-                        value={Doctor}
-                        onChange={handleChange}
-                        label="Doctor"
-                        inputRef={register({
-                          required: true,
-                        })}
-                      >
-                        <MenuItem value={10}>Auscultation</MenuItem>
-                        <MenuItem value={20}>Autopsy</MenuItem>
-                        <MenuItem value={30}>Bronchoscopy</MenuItem>
-                        <MenuItem value={30}>Cardiac catheterization</MenuItem>
-                        <MenuItem value={30}>Colposcopy</MenuItem>
-                        <MenuItem value={30}>Endoscopy</MenuItem>
-                      </Select>
+                      <InputLabel>Exam</InputLabel>
+                      <Controller
+                        as={
+                          <Select name="doctor" label="Doctor" defaultValue="">
+                            <MenuItem value={"Auscultation"}>Auscultation</MenuItem>
+                            <MenuItem value={"Autopsy"}>Autopsy</MenuItem>
+                            <MenuItem value={"Bronchoscopy"}>Bronchoscopy</MenuItem>
+                            <MenuItem value={" Cardiac catheterization"}>
+                              Cardiac catheterization
+                            </MenuItem>
+                            <MenuItem value={"Colposcopy"}>Colposcopy</MenuItem>
+                            <MenuItem value={"Endoscopy"}>Endoscopy</MenuItem>
+                          </Select>
+                        }
+                        name="exam"
+                        control={control}
+                        defaultValue=""
+                        value={Exam}
+                        onChange={handleChangeExam}
+                        rules={{ required: true }}
+                      />
                     </FormControl>
-                    {errors.examType && errors.examType.type === "required" && (
-                      <p className={classes.error}>
-                        Need to insert an Exam Type
-                      </p>
+                    {errors.exam && errors.exam.type === "required" && (
+                      <p className={classes.error}>Need to insert a Exam</p>
                     )}
                   </Grid>
                 </Grid>
@@ -765,22 +870,25 @@ function Insert() {
                   color="primary"
                   className={classes.button}
                   style={{ marginTop: "15px" }}
-                  type="submit"
+                  onClick={() => callNext(3)}
                 >
-                  Save and Continue
+                  Next
                 </Button>
               </form>
             </Box>
           </Collapse>
         </Grid>
         <Grid item xs={12} container justify="space-around">
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            Update Resume
-          </Button>
+          <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              type="submit"
+            >
+              Update Resume
+            </Button>
+          </form>
         </Grid>
       </Grid>
     </>
