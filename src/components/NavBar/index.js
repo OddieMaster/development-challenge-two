@@ -4,7 +4,7 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Container,  
+  Container,
   useMediaQuery,
   Menu,
   MenuItem,
@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex;",
     justifyContent: "space-between",
     flexDirection: "row;",
-      /* backgroundColor: "red",  */
+    /* backgroundColor: "red",  */
     [theme.breakpoints.down("md")]: {
       padding: "0",
     },
@@ -108,7 +108,7 @@ function NavBar(props) {
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);  
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
@@ -125,7 +125,7 @@ function NavBar(props) {
   const handleClose2 = () => {
     setAnchorEl2(null);
   };
-  
+
   return (
     <div className={classes.grow}>
       <AppBar className={classes.appBar}>
@@ -136,65 +136,84 @@ function NavBar(props) {
                 <img src={medClean} alt="logo" />
               </Link>
               <Container className={classes.containerButtons}>
-              <IconButton
-                color="primary"
-                aria-label="more"
-                aria-controls="long-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                
-                <MenuIcon
+                <IconButton
+                  color="primary"
+                  aria-label="more"
+                  aria-controls="long-menu"
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                >
+                  <MenuIcon
                     className={classes.VertIcon}
                     style={{ fontSize: 30 }}
                   />
-              </IconButton>
-              <Menu
-                id="long-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={open}
-                onClose={handleClose}
-                PaperProps={{
-                  style: {
-                    maxHeight: ITEM_HEIGHT * 4.5,
-                    width: "50ch",
-                    background: "black",
-                  },
-                }}
-              >
-                <MenuItem onClick={handleClose}>
-                  <Link href="/" className={classes.text} underline="none">
-                    Home
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Link href="http://localhost:3000/consult" className={classes.text} underline="none">
-                    Consult Patient
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Link href="http://localhost:3000/edit" className={classes.text} underline="none">
-                    Edit Patient
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Link href="http://localhost:3000/insert" className={classes.text} underline="none">
-                    Insert Patient
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Link href="http://localhost:3000/delete" className={classes.text} underline="none">
-                    Delete Patient
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Link href="https://www.medclean.com.br/" className={classes.text} underline="none">
-                    More About Us
-                  </Link>
-                </MenuItem>
-                
-              </Menu>{" "}
+                </IconButton>
+                <Menu
+                  id="long-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={open}
+                  onClose={handleClose}
+                  PaperProps={{
+                    style: {
+                      maxHeight: ITEM_HEIGHT * 4.5,
+                      width: "50ch",
+                      background: "black",
+                    },
+                  }}
+                >
+                  <MenuItem onClick={handleClose}>
+                    <Link href="/" className={classes.text} underline="none">
+                      Home
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Link
+                      href="http://localhost:3000/patients"
+                      className={classes.text}
+                      underline="none"
+                    >
+                      Patients
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Link
+                      href="http://localhost:3000/insert"
+                      className={classes.text}
+                      underline="none"
+                    >
+                      Insert
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Link
+                      href="http://localhost:3000/doctors"
+                      className={classes.text}
+                      underline="none"
+                    >
+                      Doctors
+                    </Link>
+                  </MenuItem>
+
+                  <MenuItem onClick={handleClose}>
+                    <Link
+                      href="http://localhost:3000/exams"
+                      className={classes.text}
+                      underline="none"
+                    >
+                      Exams
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <Link
+                      href="https://www.medclean.com.br/"
+                      className={classes.text}
+                      underline="none"
+                    >
+                      Official Website
+                    </Link>
+                  </MenuItem>
+                </Menu>{" "}
                 <IconButton
                   color="primary"
                   aria-label="more"
@@ -203,9 +222,9 @@ function NavBar(props) {
                   onClick={handleClick2}
                 >
                   <MoreVertIcon
-                  className={classes.VertIcon}
-                  style={{ fontSize: 22 }}
-                />
+                    className={classes.VertIcon}
+                    style={{ fontSize: 22 }}
+                  />
                 </IconButton>
                 <Menu
                   id="long-menu"
@@ -260,7 +279,6 @@ function NavBar(props) {
                   </MenuItem>
                 </Menu>{" "}
               </Container>
-              
             </>
           ) : (
             <>
@@ -277,20 +295,11 @@ function NavBar(props) {
                     </Box>
                     <Box m={2} pt={3}>
                       <Link
-                        href="http://localhost:3000/consult"
+                        href="http://localhost:3000/patients"
                         className={classes.text}
                         underline="none"
                       >
-                        Consult Patient
-                      </Link>
-                    </Box>
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="http://localhost:3000/edit"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Edit Patient
+                        Patients
                       </Link>
                     </Box>
                     <Box m={2} pt={3}>
@@ -299,16 +308,25 @@ function NavBar(props) {
                         className={classes.text}
                         underline="none"
                       >
-                        Insert Patient
+                        Insert
                       </Link>
                     </Box>
                     <Box m={2} pt={3}>
                       <Link
-                        href="http://localhost:3000/delete"
+                        href="http://localhost:3000/doctors"
                         className={classes.text}
                         underline="none"
                       >
-                        Delete Patient
+                        Doctors
+                      </Link>
+                    </Box>
+                    <Box m={2} pt={3}>
+                      <Link
+                        href="http://localhost:3000/exams"
+                        className={classes.text}
+                        underline="none"
+                      >
+                        Exams
                       </Link>
                     </Box>
                     <Box m={2} pt={3}>
@@ -318,7 +336,7 @@ function NavBar(props) {
                         className={classes.text}
                         underline="none"
                       >
-                        More about Us
+                        Official Website
                       </Link>
                     </Box>
                   </Container>
@@ -401,20 +419,11 @@ function NavBar(props) {
                     </Box>
                     <Box m={2} pt={3}>
                       <Link
-                        href="http://localhost:3000/consult"
+                        href="http://localhost:3000/patients"
                         className={classes.text}
                         underline="none"
                       >
-                        Consult Patient
-                      </Link>
-                    </Box>
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="http://localhost:3000/edit"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Edit Patient
+                        Patients
                       </Link>
                     </Box>
                     <Box m={2} pt={3}>
@@ -423,16 +432,26 @@ function NavBar(props) {
                         className={classes.text}
                         underline="none"
                       >
-                        Insert Patient
+                        Insert 
                       </Link>
                     </Box>
                     <Box m={2} pt={3}>
                       <Link
-                        href="http://localhost:3000/delete"
+                        href="http://localhost:3000/doctors"
                         className={classes.text}
                         underline="none"
                       >
-                        Delete Patient
+                        Doctors
+                      </Link>
+                    </Box>
+
+                    <Box m={2} pt={3}>
+                      <Link
+                        href="http://localhost:3000/exams"
+                        className={classes.text}
+                        underline="none"
+                      >
+                        Exams
                       </Link>
                     </Box>
                     <Box m={2} pt={3}>
@@ -442,7 +461,7 @@ function NavBar(props) {
                         className={classes.text}
                         underline="none"
                       >
-                        More about Us
+                        Official Website
                       </Link>
                     </Box>
                   </Container>

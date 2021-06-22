@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -73,8 +73,15 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "flex-end",
     flexGrow: 1,
+    padding: "12px 12px 12px 0px",
     "&:hover": {
       backgroundColor: "unset !important;",
+    },
+  },
+  labelIcon: {
+    "&:hover": {
+      backgroundColor: "unset !important;",
+      padding: "12px 0px 12px 12px",
     },
   },
   button: {
@@ -190,24 +197,43 @@ function Insert() {
   function onSubmit(formData) {
     console.log(formData);
   }
-  const useRef = React.useRef(true)
 
- 
-     
-  useEffect(()=> {
-   if (useRef.current){
-     useRef.current = false;
-   } else if (errors.patient  || errors.cellphone || errors.cpf || errors.rg || errors.email || errors.bdate){
-     setPatientForm(1) 
-     setPatientIcon(0)    
-   } else if (errors.street || errors.residencialNumber || errors.residentialArea || errors.city || errors.state ) {
-     setAddressForm(1)
-     setAddressIcon(0)
-   } else if (errors.resquetedBy || errors.agreement || errors.nextAppointment || errors.doctor || errors.exam) {
-     setExamForm(1)
-     setExamIcon(0)
-   }
-  }, [errors])
+  useEffect(() => {
+    if (useRef.current) {
+      useRef.current = false;
+    } else if (
+      errors.patient ||
+      errors.cellphone ||
+      errors.cpf ||
+      errors.rg ||
+      errors.email ||
+      errors.bdate
+    ) {
+      setPatientForm(1);
+      setPatientIcon(0);
+    } else if (
+      errors.street ||
+      errors.residencialNumber ||
+      errors.residentialArea ||
+      errors.city ||
+      errors.state
+    ) {
+      setAddressForm(1);
+      setAddressIcon(0);
+    } else if (
+      errors.resquetedBy ||
+      errors.agreement ||
+      errors.nextAppointment ||
+      errors.doctor ||
+      errors.exam
+    ) {
+      setExamForm(1);
+      setExamIcon(0);
+    }
+  }, [errors]);
+
+  const useRef = React.useRef(true);
+
   return (
     <>
       <Box className={classes.initialBox} />
@@ -218,24 +244,36 @@ function Insert() {
             flexDirection="column"
             className={classes.container}
           >
-            <span className={classes.text}>Patient</span>
-            {PatientIcon === 0 && (
-              <>
-                <IndeterminateCheckBoxIcon
-                  className={classes.icon}
-                  color="secondary"
-                />
-              </>
-            )}
-            {PatientIcon === 1 && (
-              <>
-                <CheckCircleIcon
-                  className={classes.icon}
-                  style={{ color: "#13ce8b" }}
-                />
-              </>
-            )}
-
+            <IconButton
+              className={classes.labelIcon}
+              color="primary"
+              aria-label="more"
+              aria-controls="long-menu"
+              aria-haspopup="true"
+              disableRipple
+              disableFocusRipple
+              onClick={() =>
+                PatientForm === 0 ? handlePatientForm(1) : handlePatientForm(0)
+              }
+            >
+              <span className={classes.text}>Patient</span>
+              {PatientIcon === 0 && (
+                <>
+                  <IndeterminateCheckBoxIcon
+                    className={classes.icon}
+                    color="secondary"
+                  />
+                </>
+              )}
+              {PatientIcon === 1 && (
+                <>
+                  <CheckCircleIcon
+                    className={classes.icon}
+                    style={{ color: "#13ce8b" }}
+                  />
+                </>
+              )}
+            </IconButton>
             <IconButton
               className={classes.iconDown}
               color="primary"
@@ -323,7 +361,7 @@ function Insert() {
                     )}
                     {errors.cellphone && errors.cellphone.type === "maxLength" && (
                       <>
-                        <p className={classes.error}>Max length exceeded</p>                        
+                        <p className={classes.error}>Max length exceeded</p>
                       </>
                     )}
                   </Grid>
@@ -445,24 +483,37 @@ function Insert() {
             flexDirection="column"
             className={classes.container}
           >
-            <span className={classes.text}>Address</span>
+            <IconButton
+              className={classes.labelIcon}
+              color="primary"
+              aria-label="more"
+              aria-controls="long-menu"
+              aria-haspopup="true"
+              disableRipple
+              disableFocusRipple
+              onClick={() =>
+                AddressForm === 0 ? handleAddressForm(1) : handleAddressForm(0)
+              }
+            >
+              <span className={classes.text}>Address</span>
 
-            {AddressIcon === 0 && (
-              <>
-                <IndeterminateCheckBoxIcon
-                  className={classes.icon}
-                  color="secondary"
-                />
-              </>
-            )}
-            {AddressIcon === 1 && (
-              <>
-                <CheckCircleIcon
-                  className={classes.icon}
-                  style={{ color: "#13ce8b" }}
-                />
-              </>
-            )}
+              {AddressIcon === 0 && (
+                <>
+                  <IndeterminateCheckBoxIcon
+                    className={classes.icon}
+                    color="secondary"
+                  />
+                </>
+              )}
+              {AddressIcon === 1 && (
+                <>
+                  <CheckCircleIcon
+                    className={classes.icon}
+                    style={{ color: "#13ce8b" }}
+                  />
+                </>
+              )}
+            </IconButton>
             <IconButton
               className={classes.iconDown}
               color="primary"
@@ -647,24 +698,37 @@ function Insert() {
             flexDirection="column"
             className={classes.container}
           >
-            <span className={classes.text}>Exam Information</span>
+            <IconButton
+              className={classes.labelIcon}
+              color="primary"
+              aria-label="more"
+              aria-controls="long-menu"
+              aria-haspopup="true"
+              disableRipple
+              disableFocusRipple
+              onClick={() =>
+                ExamForm === 0 ? handleExamForm(1) : handleExamForm(0)
+              }
+            >
+              <span className={classes.text}>Exam Information</span>
 
-            {ExamIcon === 0 && (
-              <>
-                <IndeterminateCheckBoxIcon
-                  className={classes.icon}
-                  color="secondary"
-                />
-              </>
-            )}
-            {ExamIcon === 1 && (
-              <>
-                <CheckCircleIcon
-                  className={classes.icon}
-                  style={{ color: "#13ce8b" }}
-                />
-              </>
-            )}
+              {ExamIcon === 0 && (
+                <>
+                  <IndeterminateCheckBoxIcon
+                    className={classes.icon}
+                    color="secondary"
+                  />
+                </>
+              )}
+              {ExamIcon === 1 && (
+                <>
+                  <CheckCircleIcon
+                    className={classes.icon}
+                    style={{ color: "#13ce8b" }}
+                  />
+                </>
+              )}
+            </IconButton>
             <IconButton
               className={classes.iconDown}
               color="primary"
@@ -842,9 +906,13 @@ function Insert() {
                       <Controller
                         as={
                           <Select name="doctor" label="Doctor" defaultValue="">
-                            <MenuItem value={"Auscultation"}>Auscultation</MenuItem>
+                            <MenuItem value={"Auscultation"}>
+                              Auscultation
+                            </MenuItem>
                             <MenuItem value={"Autopsy"}>Autopsy</MenuItem>
-                            <MenuItem value={"Bronchoscopy"}>Bronchoscopy</MenuItem>
+                            <MenuItem value={"Bronchoscopy"}>
+                              Bronchoscopy
+                            </MenuItem>
                             <MenuItem value={" Cardiac catheterization"}>
                               Cardiac catheterization
                             </MenuItem>
