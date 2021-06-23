@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "unset !important;",
     },
+
   },
   labelIcon: {
     "&:hover": {
@@ -213,7 +214,7 @@ function Insert() {
       setPatientIcon(0);
     } else if (
       errors.street ||
-      errors.residencialNumber ||
+      errors.residentialNumber ||
       errors.residentialArea ||
       errors.city ||
       errors.state
@@ -452,7 +453,9 @@ function Insert() {
                       }}
                       className={classes.textfield}
                       variant="outlined"
-                      inputRef={register({
+                      inputRef={register
+                        
+                        ({
                         required: true,
                         minLength: 5,
                       })}
@@ -568,8 +571,8 @@ function Insert() {
                   </Grid>
                   <Grid item className={classes.gridItens}>
                     <TextField
-                      name="residencialNumber"
-                      label="Residencial Number"
+                      name="residentialNumber"
+                      label="Residential Number"
                       margin="normal"
                       type="number"
                       className={classes.textfield}
@@ -578,8 +581,8 @@ function Insert() {
                         required: true,
                       })}
                     />
-                    {errors.residencialNumber &&
-                      errors.residencialNumber.type === "required" && (
+                    {errors.residentialNumber &&
+                      errors.residentialNumber.type === "required" && (
                         <p className={classes.error}>
                           Invalid Residential Number
                         </p>
