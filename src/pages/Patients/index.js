@@ -9,6 +9,7 @@ import {
   Button,
   TextField,
   Card,
+  TablePagination,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -16,6 +17,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+
 const useStyles = makeStyles((theme) => ({
   box: {
     marginTop: theme.spacing(20),
@@ -75,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
     gridColumnGap: "3%",
     gridRowGap: "24px",
     width: "100%",
+
     gridTemplateColumns: "auto auto auto auto",
     [theme.breakpoints.down("426")]: {
       display: "flex",
@@ -85,6 +88,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     display: "flex",
     flexDirection: "column",
+  },
+  pagination: {
+    background: "white",
   },
   gridItem: {
     background: "rgb(255,255,255,0.97)",
@@ -105,14 +111,40 @@ const useStyles = makeStyles((theme) => ({
   },
   CardContent: {
     width: "30ch",
+    padding: "16px 16px 2px 16px;",
+  },
+  detailButton: {
+    justifyContent: "flex-end",
+  },
+  padding: {
+    padding: "10px 0px 15px 20px",
+    [theme.breakpoints.down("sm")]: {
+      padding: "10px 0px 15px 25px",
+    },
+    [theme.breakpoints.down("350")]: {
+      padding: "10px 0px 15px 0px !important",
+    },
   },
 }));
 
 function Patients() {
   const classes = useStyles();
   const [FilterForm, setFilterForm] = useState(0);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(12);
+  const [InputFilter, setInputFilter] = useState("");
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
   const [data, setData] = useState([
     {
+      id: 1,
       agreement: "GEAP",
       bdate: "1995-04-03",
       cellphone: "3194962286",
@@ -131,6 +163,7 @@ function Patients() {
       street: "Rua Lais Franco",
     },
     {
+      id: 2,
       agreement: "GEAP",
       bdate: "2021-06-05",
       cellphone: "3199821749",
@@ -148,11 +181,288 @@ function Patients() {
       state: "MG",
       street: "Rua Carijós, 391",
     },
+    {
+      id: 3,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Vitor Augusto Silva",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 4,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "OddieMaster",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 5,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Jessiquinha",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 6,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Larissa Maria Abreu Romualdo",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 7,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Craftmoon",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 8,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Roomy",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 9,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "César Fonseca",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 10,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Ronan do Grand Chase",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 11,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Sora",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 12,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Aqua",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 13,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Young Xehanort",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 14,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Roxas",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 15,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Goku",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
+    {
+      id: 16,
+      agreement: "GEAP",
+      bdate: "2021-06-05",
+      cellphone: "3199821749",
+      city: "Conselheiro Lafaiete",
+      cpf: "07789808630",
+      doctor: "Guilherme",
+      email: "jessicaroziane@gmail.com",
+      exam: "Bronchoscopy",
+      nextAppointment: "2021-07-02T18:52",
+      patient: "Midorya",
+      requestedBy: "Guilherme",
+      residencialNumber: "34",
+      residentialArea: "Carijos",
+      rg: "21312312315",
+      state: "MG",
+      street: "Rua Carijós, 391",
+    },
   ]);
   function handleFilterForm(value) {
     setFilterForm(value);
   }
 
+  function searchItem(rows) {
+    if ( InputFilter !== "") {
+      return rows.filter(
+        (row) =>
+        row.patient.toLowerCase().indexOf(InputFilter.toLowerCase()) > -1 
+      );
+    } else return rows;
+  }
+
+  console.log(data[0].cpf);
+  const filteredData = searchItem(data);
   return (
     <>
       <Box className={classes.box} />
@@ -161,7 +471,8 @@ function Patients() {
           <Box className={classes.filterBar}>
             <InputBase
               className={classes.margin}
-              defaultValue=""
+              value={InputFilter}
+              onChange={(e) => setInputFilter(e.target.value)}
               startAdornment={
                 <InputAdornment position="start">
                   <SearchIcon fontSize="large" color="action" />
@@ -260,6 +571,7 @@ function Patients() {
                   />
                 </Grid>
               </Grid>
+
               <Button
                 variant="contained"
                 color="primary"
@@ -271,52 +583,71 @@ function Patients() {
               </Button>
             </Box>
           </Collapse>
-          <Box display="flex" alignItems="flex-start" flexDirection="column">
-            <Grid className={classes.gridInside}>
-              {data.map((row) => (
-                <Grid item className={classes.gridItens}>
-                  <Card className={classes.root}>
+        </Grid>
+        <Box display="flex" alignItems="flex-start" flexDirection="column">
+          <Grid
+            container
+            spacing={3}
+            className={classes.padding}
+            justify="flex-start"
+          >
+            {filteredData
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => (
+                <Grid key={row.id} item xs={"auto"} sm={"auto"}>
+                  <Card>
                     <CardContent className={classes.CardContent}>
-                      <Typography
-                        className={classes.title}
-                        color="textSecondary"
-                        gutterBottom
-                      >
+                      <Typography gutterBottom variant="h6" component="h2">
                         Name
                       </Typography>
-                      <Typography variant="h7" component="h4">
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
                         {row.patient}
                       </Typography>
-                      <Typography
-                        className={classes.title}
-                        color="textSecondary"
-                        gutterBottom
-                      >
+                      <Typography gutterBottom variant="h6" component="h2">
                         Exam Date
                       </Typography>
-                      <Typography variant="h7" component="h4">
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
                         {row.nextAppointment}
                       </Typography>
-                      <Typography
-                        className={classes.title}
-                        color="textSecondary"
-                        gutterBottom
-                      >
-                        Agreement
+                      <Typography gutterBottom variant="h6" component="h2">
+                        Exam
                       </Typography>
-                      <Typography variant="h7" component="h4">
-                        {row.agreement}
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        {row.exam}
                       </Typography>
                     </CardContent>
-                    <CardActions>
-                      <Button size="small">Details</Button>
+                    <CardActions className={classes.detailButton}>
+                      <Button variant="outlined" color="primary" size="small">
+                        Details
+                      </Button>
                     </CardActions>
                   </Card>
                 </Grid>
               ))}
-            </Grid>
-          </Box>
-        </Grid>
+          </Grid>
+          <TablePagination
+            rowsPerPageOptions={[12, 18, 24]}
+            component="div"
+            count={data.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+            className={classes.pagination}
+          />
+        </Box>
       </Grid>
     </>
   );
