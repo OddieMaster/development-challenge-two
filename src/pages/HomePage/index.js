@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Cards from "../../components/Cards";
-import { Box, Grid, Typography } from "@material-ui/core";
+import { Box, Grid, Typography, Zoom } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import MedClean from "../../assets/background.png";
+import Guilherme from "../../assets/guilherme.jpg";
+import Doctor from "../../assets/doctor.jpg";
 
 const useStyles = makeStyles((theme) => ({
   cards: {
@@ -10,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
   text: {
     fontFamily: "'Dosis', sans-serif",
     color: "white",
+    [theme.breakpoints.down("769")]: {
+      fontSize: 30,
+    },
   },
 
   box: {
@@ -22,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
 
 function HomePage() {
   const classes = useStyles();
+  const [Grow, setGrow] = useState(false);
+  useEffect(() => {
+    setGrow(true);
+  }, []);
 
   return (
     <>
@@ -47,16 +57,41 @@ function HomePage() {
         Manage your patient's info above on the menu, more about us bellow.
       </Typography>
       <Box mt={7} />
+
       <Grid container spacing={2} justify="center">
-        <Grid item xs={"auto"} sm={"auto"}>
-          <Cards className={classes.cards} />
-        </Grid>
-        <Grid item xs={"auto"} sm={"auto"}>
-          <Cards className={classes.cards} />
-        </Grid>
-        <Grid item xs={"auto"} sm={"auto"}>
-          <Cards className={classes.cards} />
-        </Grid>
+      <Zoom in={Grow}>
+          <Grid item xs={"auto"} sm={"auto"}>
+            <Cards
+              className={classes.cards}
+              title="About MedClean"
+              description="Medclean is a manufacturer of single-use disposables in Medical Grade SMS Nonwovens and a distributor of products that work in the cleaning, decontamination and conservation..."
+              img={MedClean}
+              link="https://www.medclean.com.br/a-medclean"
+            />
+          </Grid>
+        </Zoom>
+        <Zoom in={Grow} style={{ transitionDelay: Grow ? "500ms" : "0ms" }}>
+          <Grid item xs={"auto"} sm={"auto"}>
+            <Cards
+              className={classes.cards}
+              title="A guy for u to hire!"
+              description="Great guy, pls give me a chance!"
+              img={Guilherme}
+              link="https://www.linkedin.com/in/guilherme-romualdo-290641152/"
+            />
+          </Grid>
+        </Zoom>
+        <Zoom in={Grow} style={{ transitionDelay: Grow ? "1000ms" : "0ms" }}>
+          <Grid item xs={"auto"} sm={"auto"}>
+            <Cards
+              className={classes.cards}
+              title="Our mission"
+              description="Provide innovative and quality solutions aimed at the safety of patients and professionals working in health services."
+              img={Doctor}
+              link="https://www.medclean.com.br/a-medclean"
+            />
+          </Grid>
+        </Zoom>
       </Grid>
     </>
   );

@@ -5,48 +5,55 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import  MedClean  from "../../assets/background.png";
+
 
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    width: 290,
+  },
+  typography: {
+    height: 130,
   },
   media: {
     height: 140,
   },
+  text: {  
+    fontSize: 15,
+    textAlign: "justify",
+  },
+  button: {
+    fontFamily: "'dosis'",
+  },
 });
 
-export default function MediaCard() {
+export default function MediaCard(props) {
   const classes = useStyles();
+  const {title, description, img, link} = props;
 
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={MedClean}
+          image={img}
           title="Contemplative Reptile"
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+        <CardContent className={classes.typography}>
+          <Typography gutterBottom variant="h5" component="h2" align="center">
+            {title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+          <Typography variant="body2" color="textSecondary" component="p"  className={classes.text}>
+            {description}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
+       <Link  href={link} target="_blank" rel="noopener" className={classes.button}>
+        Learn More
+        </Link>
       </CardActions>
     </Card>
   );

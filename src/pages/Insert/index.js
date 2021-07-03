@@ -16,6 +16,10 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import IndeterminateCheckBoxIcon from "@material-ui/icons/IndeterminateCheckBox";
 import { useForm, Controller } from "react-hook-form";
+import axios from "axios";
+import { aws4Interceptor } from "aws4-axios";
+import { v4 as uuidv4 } from 'uuid';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   initialBox: {
@@ -77,7 +81,6 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "unset !important;",
     },
-
   },
   labelIcon: {
     "&:hover": {
@@ -151,7 +154,7 @@ function Insert() {
   const [Doctor, setDoctor] = useState("");
   const [Exam, setExam] = useState("");
   const { handleSubmit, register, control, errors } = useForm({});
-
+  let history = useHistory();
   var today = new Date();
   today.setDate(today.getDate());
   var date = today.toISOString().substr(0, 10);
@@ -194,9 +197,39 @@ function Insert() {
       // do nothing
     }
   };
+  const interceptor = aws4Interceptor(
+    {
+      region: "sa-east-1",
+      service: "execute-api",
+    },
+    {
+      accessKeyId: "AKIAVAOH6Q7SO4UMIJUG",
+      secretAccessKey: "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",
+    }
+  );
+
+  axios.interceptors.request.use(interceptor);
 
   function onSubmit(formData) {
-    console.log(formData);
+    formData.id = uuidv4();
+    console.log(JSON.stringify(formData));
+
+    axios({
+      method: "post",
+      url: "https://tiz00hscgh.execute-api.sa-east-1.amazonaws.com/med/patients/post",
+      data: JSON.stringify(formData),
+      headers: { "Content-Type": "application.json" },
+    })
+      .then(function (response) {
+        window.alert("Successfully inserted patient! Returning to the homepage");
+        history.push("/");
+        //handle success
+        console.log(response);
+      })
+      .catch(function (response) {
+       //handle error
+       console.log(response);        
+      });
   }
 
   useEffect(() => {
@@ -217,7 +250,7 @@ function Insert() {
       errors.residentialNumber ||
       errors.residentialArea ||
       errors.city ||
-      errors.state
+      errors.stateq
     ) {
       setAddressForm(1);
       setAddressIcon(0);
@@ -453,9 +486,7 @@ function Insert() {
                       }}
                       className={classes.textfield}
                       variant="outlined"
-                      inputRef={register
-                        
-                        ({
+                      inputRef={register({
                         required: true,
                         minLength: 5,
                       })}
@@ -657,7 +688,7 @@ function Insert() {
                   </Grid>
                   <Grid item className={classes.gridItens}>
                     <TextField
-                      name="state"
+                      name="stateq"
                       label="State"
                       margin="normal"
                       type="text"
@@ -669,15 +700,15 @@ function Insert() {
                         maxLength: 30,
                       })}
                     />
-                    {errors.state && errors.state.type === "required" && (
+                    {errors.stateq && errors.stateq.type === "required" && (
                       <p className={classes.error}>Invalid state</p>
                     )}
-                    {errors.state && errors.state.type === "minLength" && (
+                    {errors.stateq && errors.stateq.type === "minLength" && (
                       <p className={classes.error}>
                         This field required min lenght of 1
                       </p>
                     )}
-                    {errors.state && errors.state.type === "maxLength" && (
+                    {errors.stateq && errors.stateq.type === "maxLength" && (
                       <p className={classes.error}>Max length exceeded</p>
                     )}
                   </Grid>
