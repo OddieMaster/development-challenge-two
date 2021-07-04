@@ -215,13 +215,14 @@ function Patients() {
   function handleFilterForm(value) {
     setFilterForm(value);
   }
+ 
 
   useEffect(() => {
     axios
       .get(
-        "https://tiz00hscgh.execute-api.sa-east-1.amazonaws.com/med/patients"
-      )
-      .then((res) => {
+        "https://tiz00hscgh.execute-api.sa-east-1.amazonaws.com/med/patients",
+      )      
+      .then((res) => {       
         setData(JSON.parse(res.data.body));
         setInfoArrived(true);
       });
@@ -234,7 +235,8 @@ function Patients() {
           row.patient.toLowerCase().indexOf(InputFilter.toLowerCase()) > -1 ||
           row.cpf.indexOf(InputFilter) > -1
       );
-    } else return rows;
+    }  else
+    return rows;
   }
   const filteredData = searchItem(data);
 
@@ -272,7 +274,7 @@ function Patients() {
           ControlId,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json",          
           },
           data: {
             id: ControlId,
@@ -328,109 +330,105 @@ function Patients() {
 
   return (
     <>
-      {infoArrived === true ? (
-        <>
-          <Box className={classes.box} />
-          <Grid container spacing={10} direction="row" className={classes.grid}>
-            <Grid item xs={12} className={classes.gridItem}>
-              <Box className={classes.filterBar}>
-                <InputBase
-                  className={classes.margin}
-                  value={InputFilter}
-                  onChange={(e) => setInputFilter(e.target.value)}
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <SearchIcon fontSize="large" color="action" />
-                    </InputAdornment>
-                  }
-                />
+      <Box className={classes.box} />
+      <Grid container spacing={10} direction="row" className={classes.grid}>
+        <Grid item xs={12} className={classes.gridItem}>
+          <Box className={classes.filterBar}>
+            <InputBase
+              className={classes.margin}
+              value={InputFilter}
+              onChange={(e) => setInputFilter(e.target.value)}
+              startAdornment={
+                <InputAdornment position="start">
+                  <SearchIcon fontSize="large" color="action" />
+                </InputAdornment>
+              }
+            />
 
-                <IconButton
-                  className={classes.iconFilter}
-                  color="primary"
-                  aria-label="more"
-                  aria-controls="long-menu"
-                  aria-haspopup="true"
-                  disableRipple
-                  disableFocusRipple
-                  onClick={() =>
-                    FilterForm === 0 ? handleFilterForm(1) : handleFilterForm(0)
-                  }
-                >
-                  <span className={classes.text}>Filters</span>
-                  <KeyboardArrowDownIcon
-                    style={{ fontSize: 22 }}
-                    className={[
-                      classes.dropdown,
-                      FilterForm === 0
-                        ? classes.dropdownOpen
-                        : classes.dropdownClosed,
-                    ].join(" ")}
+            <IconButton
+              className={classes.iconFilter}
+              color="primary"
+              aria-label="more"
+              aria-controls="long-menu"
+              aria-haspopup="true"
+              disableRipple
+              disableFocusRipple
+              onClick={() =>
+                FilterForm === 0 ? handleFilterForm(1) : handleFilterForm(0)
+              }
+            >
+              <span className={classes.text}>Filters</span>
+              <KeyboardArrowDownIcon
+                style={{ fontSize: 22 }}
+                className={[
+                  classes.dropdown,
+                  FilterForm === 0
+                    ? classes.dropdownOpen
+                    : classes.dropdownClosed,
+                ].join(" ")}
+              />
+            </IconButton>
+          </Box>
+          <Collapse in={FilterForm === 1}>
+            <Box display="flex" alignItems="flex-end" flexDirection="column">
+              <Grid className={classes.gridInside}>
+                <Grid item className={classes.gridItens}>
+                  <TextField
+                    name="cellphone"
+                    label="Cellphone"
+                    margin="normal"
+                    type="number"
+                    variant="outlined"                  
                   />
-                </IconButton>
-              </Box>
-              <Collapse in={FilterForm === 1}>
-                <Box
-                  display="flex"
-                  alignItems="flex-end"
-                  flexDirection="column"
-                >
-                  <Grid className={classes.gridInside}>
-                    <Grid item className={classes.gridItens}>
-                      <TextField
-                        name="cellphone"
-                        label="Cellphone"
-                        margin="normal"
-                        type="number"
-                        variant="outlined"
-                      />
-                    </Grid>
+                </Grid>
 
-                    <Grid item className={classes.gridItens}>
-                      <TextField
-                        name="rg"
-                        label="RG"
-                        margin="normal"
-                        type="text"
-                        variant="outlined"
-                      />
-                    </Grid>
-                    <Grid item className={classes.gridItens}>
-                      <TextField
-                        name="email"
-                        label="Email"
-                        margin="normal"
-                        type="email"
-                        variant="outlined"
-                      />
-                    </Grid>
-                    <Grid item className={classes.gridItens}>
-                      <TextField
-                        name="bdate"
-                        label="Birth Date"
-                        margin="normal"
-                        type="date"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        variant="outlined"
-                      />
-                    </Grid>
-                  </Grid>
+                <Grid item className={classes.gridItens}>
+                  <TextField
+                    name="rg"
+                    label="RG"
+                    margin="normal"
+                    type="text"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item className={classes.gridItens}>
+                  <TextField
+                    name="email"
+                    label="Email"
+                    margin="normal"
+                    type="email"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item className={classes.gridItens}>
+                  <TextField
+                    name="bdate"
+                    label="Birth Date"
+                    margin="normal"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                  />
+                </Grid>
+              </Grid>
 
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                    style={{ marginTop: "15px" }}
-                    onClick={() => handleFilterForm(0)}
-                  >
-                    Apply Filters
-                  </Button>
-                </Box>
-              </Collapse>
-            </Grid>
-            <Box display="flex" alignItems="flex-start" flexDirection="column">
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                style={{ marginTop: "15px" }}
+                onClick={() => handleFilterForm(0)}
+              >
+                Apply Filters
+              </Button>
+            </Box>
+          </Collapse>
+        </Grid>
+        <Box display="flex" alignItems="flex-start" flexDirection="column">
+          {infoArrived === true ? (
+            <>
               <Grid
                 container
                 spacing={3}
@@ -1255,15 +1253,15 @@ function Patients() {
                 onChangeRowsPerPage={handleChangeRowsPerPage}
                 className={classes.pagination}
               />
-            </Box>
-          </Grid>{" "}
-        </>
-      ) : (
-        <>
-          {" "}
-          <CircularProgress />{" "}
-        </>
-      )}
+            </>
+          ) : (
+            <>
+              {" "}
+              <CircularProgress />{" "}
+            </>
+          )}
+        </Box>
+      </Grid>{" "}
     </>
   );
 }
