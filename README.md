@@ -5,7 +5,6 @@
 Challenge | Repository for a developer test
 
 Used tecnologies: 
-ReactJS, HTML5, CSS3, Material UI e Yarn.
 
 - [ReactJS] 
 - [HTML]
