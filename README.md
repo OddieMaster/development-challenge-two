@@ -25,7 +25,7 @@ To install the dependencies
 yarn install
 ```
 
-To start the project... (take note bellow berfore start)
+To start the project... (take note below before start)
 
 ```sh
 yarn start
