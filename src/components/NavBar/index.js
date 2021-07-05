@@ -1,14 +1,14 @@
 import React from "react";
 import {
-  Link,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Container,
-  useMediaQuery,
-  Menu,
-  MenuItem,
-  Box,
+    Link,
+    AppBar,
+    Toolbar,
+    IconButton,
+    Container,
+    useMediaQuery,
+    Menu,
+    MenuItem,
+    Box,
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -20,494 +20,409 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import { lightBlue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: "1",
-  },
-  appBar: {
-    background: "  rgba(0,0,0,0.1)",
-  },
-  toolbar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    background: "  rgba(0,0,0,0.1)",
-    alignContent: "center",
-    padding: "0px 100px 0px 100px",
-    [theme.breakpoints.down("lg")]: {
-      padding: "0px 40px 0px 25px",
+    grow: {
+        flexGrow: "1",
     },
-    [theme.breakpoints.down("sm")]: {
-      padding: "0px 5px 0px 5px",
+    appBar: {
+        background: "  rgba(0,0,0,0.1)",
     },
-  },
-  button: {
-    color: "#D0CBD5",
-    paddingLeft: "20px",
-    paddingRight: "20px",
-  },
+    toolbar: {
+        borderBottom: `1px solid ${theme.palette.divider}`,
+        background: "  rgba(0,0,0,0.1)",
+        alignContent: "center",
+        padding: "0px 100px 0px 100px",
+        [theme.breakpoints.down("lg")]: {
+            padding: "0px 40px 0px 25px",
+        },
+        [theme.breakpoints.down("sm")]: {
+            padding: "0px 5px 0px 5px",
+        },
+    },
+    button: {
+        color: "#D0CBD5",
+        paddingLeft: "20px",
+        paddingRight: "20px",
+    },
 
-  text: {
-    fontSize: "16px",
-    fontWeight: "500",
-    fontFamily: "'Dosis'",
-    color: "white",
-    textTransform: "uppercase",
-    textDecoration: "none !important",
-    position: "relative",
-    display: "block",
-    "&:hover": {
-      color: "rgba(255, 255, 255, 0.5) !important",
+    text: {
+        fontSize: "16px",
+        fontWeight: "500",
+        fontFamily: "'Dosis'",
+        color: "white",
+        textTransform: "uppercase",
+        textDecoration: "none !important",
+        position: "relative",
+        display: "block",
+        "&:hover": {
+            color: "rgba(255, 255, 255, 0.5) !important",
+        },
     },
-  },
 
-  VertIcon: {
-    color: "white",
-    [theme.breakpoints.down("sm")]: {
-      justifyContent: "flex-end",
+    VertIcon: {
+        color: "white",
+        [theme.breakpoints.down("sm")]: {
+            justifyContent: "flex-end",
+        },
     },
-  },
 
-  IconButton: {
-    backgroundColor: "white",
-    padding: "15px",
-    marginLeft: "10px",
-    "&:hover": {
-      boxShadow: " 0 0 10px #00a8ff",
-      color: "#fff;",
-      fontSize: 175,
+    IconButton: {
+        backgroundColor: "white",
+        padding: "15px",
+        marginLeft: "10px",
+        "&:hover": {
+            boxShadow: " 0 0 10px #00a8ff",
+            color: "#fff;",
+            fontSize: 175,
+        },
     },
-  },
 
-  container: {
-    display: "flex",
-    /* backgroundColor: "green", */
-    justifyContent: "flex-end",
-  },
-  containerButtons: {
-    display: "flex;",
-    justifyContent: "space-between",
-    flexDirection: "row;",
-    /* backgroundColor: "red",  */
-    [theme.breakpoints.down("md")]: {
-      padding: "0",
+    container: {
+        display: "flex",
+        justifyContent: "flex-end",
     },
-    [theme.breakpoints.down("sm")]: {
-      justifyContent: "space-around",
+
+    containerButtons: {
+        display: "flex;",
+        justifyContent: "space-between",
+        flexDirection: "row;",
+        [theme.breakpoints.down("md")]: {
+            padding: "0",
+        },
+        [theme.breakpoints.down("sm")]: {
+            justifyContent: "space-around",
+        },
     },
-  },
 }));
 
 const ITEM_HEIGHT = 48;
 
 function NavBar(props) {
-  const classes = useStyles();
-  const theme = useTheme();
+    const classes = useStyles();
+    const theme = useTheme();
 
-  const isMatch = useMediaQuery(theme.breakpoints.down("1023"));
-  const isMobile = useMediaQuery(theme.breakpoints.down("426"));
+    const isMatch = useMediaQuery(theme.breakpoints.down("1023"));
+    const isMobile = useMediaQuery(theme.breakpoints.down("426"));
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl2, setAnchorEl2] = React.useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    const open = Boolean(anchorEl);
+    const open2 = Boolean(anchorEl2);
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    const handleClick2 = (event) => {
+        setAnchorEl2(event.currentTarget);
+    };
+    const handleClose2 = () => {
+        setAnchorEl2(null);
+    };
+    const MenuItens = [
+        {
+            id: 1,
+            href: "/",
+            title: "Home",
+        },
+        {
+            id: 2,
+            href: "http://localhost:3000/patients",
+            title: "Patients",
+        },
+        {
+            id: 3,
+            href: "http://localhost:3000/insert",
+            title: "Insert",
+        },
+        {
+            id: 4,
+            href: "http://localhost:3000/doctors",
+            title: "Doctors",
+        },
+        {
+            id: 5,
+            href: "http://localhost:3000/exams",
+            title: "Exams",
+        },
+        {
+            id: 6,
+            href: "https://www.medclean.com.br/",
+            title: "Official Website",
+        },
+    ];
 
-  const [anchorEl2, setAnchorEl2] = React.useState(null);
-  const open2 = Boolean(anchorEl2);
+    return (
+        <div className={classes.grow}>
+            <AppBar className={classes.appBar}>
+                <Toolbar className={classes.toolbar}>
+                    {isMobile ? (
+                        <>
+                            <Link href="">
+                                <img src={medClean} alt="logo" />
+                            </Link>
+                            <Container className={classes.containerButtons}>
+                                <IconButton
+                                    color="primary"
+                                    aria-label="more"
+                                    aria-controls="long-menu"
+                                    aria-haspopup="true"
+                                    onClick={handleClick}
+                                >
+                                    <MenuIcon
+                                        className={classes.VertIcon}
+                                        style={{ fontSize: 30 }}
+                                    />
+                                </IconButton>
+                                <Menu
+                                    id="long-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={open}
+                                    onClose={handleClose}
+                                    PaperProps={{
+                                        style: {
+                                            maxHeight: ITEM_HEIGHT * 4.5,
+                                            width: "50ch",
+                                            background: "black",
+                                        },
+                                    }}
+                                >
+                                    {MenuItens.map((row) => (
+                                        <div key={row.id}>
+                                            <MenuItem onClick={handleClose}>
+                                                <Link
+                                                    href={row.href}
+                                                    className={classes.text}
+                                                    underline="none"
+                                                >
+                                                    {row.title}
+                                                </Link>
+                                            </MenuItem>
+                                        </div>
+                                    ))}
+                                </Menu>
+                                <IconButton
+                                    color="primary"
+                                    aria-label="more"
+                                    aria-controls="long-menu"
+                                    aria-haspopup="true"
+                                    onClick={handleClick2}
+                                >
+                                    <MoreVertIcon
+                                        className={classes.VertIcon}
+                                        style={{ fontSize: 22 }}
+                                    />
+                                </IconButton>
+                                <Menu
+                                    id="long-menu"
+                                    anchorEl={anchorEl2}
+                                    keepMounted
+                                    open={open2}
+                                    onClose={handleClose2}
+                                    PaperProps={{
+                                        style: {
+                                            maxHeight: ITEM_HEIGHT * 4.5,
+                                            width: "20ch",
+                                            background: "black",
+                                        },
+                                    }}
+                                >
+                                    <MenuItem onClick={handleClose2}>
+                                        <IconButton
+                                            className={classes.IconButton}
+                                            href="https://www.facebook.com/MedcleanBR/"
+                                            target="_blank"
+                                            rel="noopener"
+                                            color="primary"
+                                            aria-label="facebook"
+                                        >
+                                            <FacebookIcon />
+                                        </IconButton>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose2}>
+                                        <IconButton
+                                            className={classes.IconButton}
+                                            href="https://www.instagram.com/medclean_br/"
+                                            target="_blank"
+                                            rel="noopener"
+                                            color="secondary"
+                                            aria-label="instagram"
+                                        >
+                                            <InstagramIcon />
+                                        </IconButton>
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose2}>
+                                        <IconButton
+                                            className={classes.IconButton}
+                                            href="https://br.linkedin.com/company/medclean"
+                                            target="_blank"
+                                            rel="noopener"
+                                            color="inherit"
+                                            aria-label="linkedin"
+                                            style={{ color: lightBlue[500] }}
+                                        >
+                                            <LinkedInIcon />
+                                        </IconButton>
+                                    </MenuItem>
+                                </Menu>
+                            </Container>
+                        </>
+                    ) : (
+                        <>
+                            {isMatch ? (
+                                <>
+                                    <Link href="">
+                                        <img src={medClean} alt="logo" />
+                                    </Link>
+                                    <Container
+                                        className={classes.containerButtons}
+                                    >
+                                        {MenuItens.map((row) => (
+                                            <Box key={row.id} m={2} pt={3}>
+                                                <Link
+                                                    href={row.href}
+                                                    className={classes.text}
+                                                    underline="none"
+                                                >
+                                                    {row.title}
+                                                </Link>
+                                            </Box>
+                                        ))}
+                                    </Container>
+                                    <IconButton
+                                        color="primary"
+                                        aria-label="more"
+                                        aria-controls="long-menu"
+                                        aria-haspopup="true"
+                                        onClick={handleClick}
+                                    >
+                                        <MoreVertIcon
+                                            className={classes.VertIcon}
+                                            style={{ fontSize: 30 }}
+                                        />
+                                    </IconButton>
+                                    <Menu
+                                        id="long-menu"
+                                        anchorEl={anchorEl}
+                                        keepMounted
+                                        open={open}
+                                        onClose={handleClose}
+                                        PaperProps={{
+                                            style: {
+                                                maxHeight: ITEM_HEIGHT * 4.5,
+                                                width: "20ch",
+                                                background: "black",
+                                            },
+                                        }}
+                                    >
+                                        <MenuItem onClick={handleClose}>
+                                            <IconButton
+                                                className={classes.IconButton}
+                                                href="https://www.facebook.com/MedcleanBR/"
+                                                target="_blank"
+                                                rel="noopener"
+                                                color="primary"
+                                                aria-label="facebook"
+                                            >
+                                                <FacebookIcon />
+                                            </IconButton>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleClose}>
+                                            <IconButton
+                                                className={classes.IconButton}
+                                                href="https://www.instagram.com/medclean_br/"
+                                                target="_blank"
+                                                rel="noopener"
+                                                color="secondary"
+                                                aria-label="instagram"
+                                            >
+                                                <InstagramIcon />
+                                            </IconButton>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleClose}>
+                                            <IconButton
+                                                className={classes.IconButton}
+                                                href="https://br.linkedin.com/company/medclean"
+                                                target="_blank"
+                                                rel="noopener"
+                                                color="inherit"
+                                                aria-label="linkedin"
+                                                style={{
+                                                    color: lightBlue[500],
+                                                }}
+                                            >
+                                                <LinkedInIcon />
+                                            </IconButton>
+                                        </MenuItem>
+                                    </Menu>{" "}
+                                </>
+                            ) : (
+                                <>
+                                    {" "}
+                                    <Link href="">
+                                        <img src={medClean} alt="logo" />
+                                    </Link>
+                                    <Container
+                                        className={classes.containerButtons}
+                                    >
+                                        {MenuItens.map((row) => (
+                                            <Box m={2} pt={3} key={row.id}>
+                                                <Link
+                                                    href={row.href}
+                                                    className={classes.text}
+                                                    underline="none"
+                                                >
+                                                    {row.title}
+                                                </Link>
+                                            </Box>
+                                        ))}
+                                    </Container>
+                                    <Container className={classes.container}>
+                                        <IconButton
+                                            className={classes.IconButton}
+                                            href="https://www.facebook.com/MedcleanBR/"
+                                            target="_blank"
+                                            rel="noopener"
+                                            color="primary"
+                                            aria-label="facebook"
+                                        >
+                                            <FacebookIcon />
+                                        </IconButton>
 
-  const handleClick2 = (event) => {
-    setAnchorEl2(event.currentTarget);
-  };
+                                        <IconButton
+                                            className={classes.IconButton}
+                                            href="https://www.instagram.com/medclean_br/"
+                                            target="_blank"
+                                            rel="noopener"
+                                            color="secondary"
+                                            aria-label="instagram"
+                                        >
+                                            <InstagramIcon />
+                                        </IconButton>
 
-  const handleClose2 = () => {
-    setAnchorEl2(null);
-  };
-
-  return (
-    <div className={classes.grow}>
-      <AppBar className={classes.appBar}>
-        <Toolbar className={classes.toolbar}>
-          {isMobile ? (
-            <>
-              <Link href="">
-                <img src={medClean} alt="logo" />
-              </Link>
-              <Container className={classes.containerButtons}>
-                <IconButton
-                  color="primary"
-                  aria-label="more"
-                  aria-controls="long-menu"
-                  aria-haspopup="true"
-                  onClick={handleClick}
-                >
-                  <MenuIcon
-                    className={classes.VertIcon}
-                    style={{ fontSize: 30 }}
-                  />
-                </IconButton>
-                <Menu
-                  id="long-menu"
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={open}
-                  onClose={handleClose}
-                  PaperProps={{
-                    style: {
-                      maxHeight: ITEM_HEIGHT * 4.5,
-                      width: "50ch",
-                      background: "black",
-                    },
-                  }}
-                >
-                  <MenuItem onClick={handleClose}>
-                    <Link href="/" className={classes.text} underline="none">
-                      Home
-                    </Link>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <Link
-                      href="http://localhost:3000/patients"
-                      className={classes.text}
-                      underline="none"
-                    >
-                      Patients
-                    </Link>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <Link
-                      href="http://localhost:3000/insert"
-                      className={classes.text}
-                      underline="none"
-                    >
-                      Insert
-                    </Link>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <Link
-                      href="http://localhost:3000/doctors"
-                      className={classes.text}
-                      underline="none"
-                    >
-                      Doctors
-                    </Link>
-                  </MenuItem>
-
-                  <MenuItem onClick={handleClose}>
-                    <Link
-                      href="http://localhost:3000/exams"
-                      className={classes.text}
-                      underline="none"
-                    >
-                      Exams
-                    </Link>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <Link
-                      href="https://www.medclean.com.br/"
-                      className={classes.text}
-                      underline="none"
-                    >
-                      Official Website
-                    </Link>
-                  </MenuItem>
-                </Menu>{" "}
-                <IconButton
-                  color="primary"
-                  aria-label="more"
-                  aria-controls="long-menu"
-                  aria-haspopup="true"
-                  onClick={handleClick2}
-                >
-                  <MoreVertIcon
-                    className={classes.VertIcon}
-                    style={{ fontSize: 22 }}
-                  />
-                </IconButton>
-                <Menu
-                  id="long-menu"
-                  anchorEl={anchorEl2}
-                  keepMounted
-                  open={open2}
-                  onClose={handleClose2}
-                  PaperProps={{
-                    style: {
-                      maxHeight: ITEM_HEIGHT * 4.5,
-                      width: "20ch",
-                      background: "black",
-                    },
-                  }}
-                >
-                  <MenuItem onClick={handleClose2}>
-                    <IconButton
-                      className={classes.IconButton}
-                      href="https://www.facebook.com/MedcleanBR/"
-                      target="_blank"
-                      rel="noopener"
-                      color="primary"
-                      aria-label="facebook"
-                    >
-                      <FacebookIcon />
-                    </IconButton>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose2}>
-                    <IconButton
-                      className={classes.IconButton}
-                      href="https://www.instagram.com/medclean_br/"
-                      target="_blank"
-                      rel="noopener"
-                      color="secondary"
-                      aria-label="instagram"
-                    >
-                      <InstagramIcon />
-                    </IconButton>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose2}>
-                    <IconButton
-                      className={classes.IconButton}
-                      href="https://br.linkedin.com/company/medclean"
-                      target="_blank"
-                      rel="noopener"
-                      color="inherit"
-                      aria-label="linkedin"
-                      style={{ color: lightBlue[500] }}
-                    >
-                      <LinkedInIcon />
-                    </IconButton>
-                  </MenuItem>
-                </Menu>{" "}
-              </Container>
-            </>
-          ) : (
-            <>
-              {isMatch ? (
-                <>
-                  <Link href="">
-                    <img src={medClean} alt="logo" />
-                  </Link>
-                  <Container className={classes.containerButtons}>
-                    <Box m={2} pt={3}>
-                      <Link href="/" className={classes.text} underline="none">
-                        Home
-                      </Link>
-                    </Box>
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="http://localhost:3000/patients"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Patients
-                      </Link>
-                    </Box>
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="http://localhost:3000/insert"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Insert
-                      </Link>
-                    </Box>
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="http://localhost:3000/doctors"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Doctors
-                      </Link>
-                    </Box>
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="http://localhost:3000/exams"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Exams
-                      </Link>
-                    </Box>
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="https://www.medclean.com.br/"
-                        target="_blank"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Official Website
-                      </Link>
-                    </Box>
-                  </Container>
-                  <IconButton
-                    color="primary"
-                    aria-label="more"
-                    aria-controls="long-menu"
-                    aria-haspopup="true"
-                    onClick={handleClick}
-                  >
-                    <MoreVertIcon
-                      className={classes.VertIcon}
-                      style={{ fontSize: 30 }}
-                    />
-                  </IconButton>
-                  <Menu
-                    id="long-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={open}
-                    onClose={handleClose}
-                    PaperProps={{
-                      style: {
-                        maxHeight: ITEM_HEIGHT * 4.5,
-                        width: "20ch",
-                        background: "black",
-                      },
-                    }}
-                  >
-                    <MenuItem onClick={handleClose}>
-                      <IconButton
-                        className={classes.IconButton}
-                        href="https://www.facebook.com/MedcleanBR/"
-                        target="_blank"
-                        rel="noopener"
-                        color="primary"
-                        aria-label="facebook"
-                      >
-                        <FacebookIcon />
-                      </IconButton>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose}>
-                      <IconButton
-                        className={classes.IconButton}
-                        href="https://www.instagram.com/medclean_br/"
-                        target="_blank"
-                        rel="noopener"
-                        color="secondary"
-                        aria-label="instagram"
-                      >
-                        <InstagramIcon />
-                      </IconButton>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose}>
-                      <IconButton
-                        className={classes.IconButton}
-                        href="https://br.linkedin.com/company/medclean"
-                        target="_blank"
-                        rel="noopener"
-                        color="inherit"
-                        aria-label="linkedin"
-                        style={{ color: lightBlue[500] }}
-                      >
-                        <LinkedInIcon />
-                      </IconButton>
-                    </MenuItem>
-                  </Menu>{" "}
-                </>
-              ) : (
-                <>
-                  {" "}
-                  <Link href="">
-                    <img src={medClean} alt="logo" />
-                  </Link>
-                  <Container className={classes.containerButtons}>
-                    <Box m={2} pt={3}>
-                      <Link href="/" className={classes.text} underline="none">
-                        Home
-                      </Link>
-                    </Box>
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="http://localhost:3000/patients"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Patients
-                      </Link>
-                    </Box>
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="http://localhost:3000/insert"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Insert 
-                      </Link>
-                    </Box>
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="http://localhost:3000/doctors"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Doctors
-                      </Link>
-                    </Box>
-
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="http://localhost:3000/exams"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Exams
-                      </Link>
-                    </Box>
-                    <Box m={2} pt={3}>
-                      <Link
-                        href="https://www.medclean.com.br/"
-                        target="_blank"
-                        className={classes.text}
-                        underline="none"
-                      >
-                        Official Website
-                      </Link>
-                    </Box>
-                  </Container>
-                  <Container className={classes.container}>
-                    <IconButton
-                      className={classes.IconButton}
-                      href="https://www.facebook.com/MedcleanBR/"
-                      target="_blank"
-                      rel="noopener"
-                      color="primary"
-                      aria-label="facebook"
-                    >
-                      <FacebookIcon />
-                    </IconButton>
-
-                    <IconButton
-                      className={classes.IconButton}
-                      href="https://www.instagram.com/medclean_br/"
-                      target="_blank"
-                      rel="noopener"
-                      color="secondary"
-                      aria-label="instagram"
-                    >
-                      <InstagramIcon />
-                    </IconButton>
-
-                    <IconButton
-                      className={classes.IconButton}
-                      href="https://br.linkedin.com/company/medclean"
-                      target="_blank"
-                      rel="noopener"
-                      color="inherit"
-                      aria-label="linkedin"
-                      style={{ color: lightBlue[500] }}
-                    >
-                      <LinkedInIcon />
-                    </IconButton>
-                  </Container>{" "}
-                </>
-              )}
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+                                        <IconButton
+                                            className={classes.IconButton}
+                                            href="https://br.linkedin.com/company/medclean"
+                                            target="_blank"
+                                            rel="noopener"
+                                            color="inherit"
+                                            aria-label="linkedin"
+                                            style={{ color: lightBlue[500] }}
+                                        >
+                                            <LinkedInIcon />
+                                        </IconButton>
+                                    </Container>
+                                </>
+                            )}
+                        </>
+                    )}
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }
 
 export default NavBar;
