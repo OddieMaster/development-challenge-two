@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Cards from "../../components/Cards";
 import { Box, Grid, Typography, Zoom } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Medcloud from "../../assets/background.png";
-import Guilherme from "../../assets/guilherme.jpg";
+import Medcloud from "../../assets/medcloud.jpg";
+import OurValues from "../../assets/valores.jpg";
 import Doctor from "../../assets/doctor.jpg";
 
 const useStyles = makeStyles((theme) => ({
@@ -65,9 +65,9 @@ function HomePage() {
                         <Cards
                             className={classes.cards}
                             title="About Medcloud"
-                            description="Medcloud is a manufacturer of single-use disposables in Medical Grade SMS Nonwovens and a distributor of products that work in the cleaning, decontamination and conservation..."
+                            description="Medcloud has been operating in the medical image management software market since 2012. Since then, we have been awarded prizes..."
                             img={Medcloud}
-                            link="https://www.Medcloud.com.br/a-Medcloud"
+                            link="https://www.medcloud.com.br/"
                         />
                     </Grid>
                 </Zoom>
@@ -78,10 +78,10 @@ function HomePage() {
                     <Grid item xs={"auto"} sm={"auto"}>
                         <Cards
                             className={classes.cards}
-                            title="A guy for u to hire!"
-                            description="Great guy, pls give me a chance!"
-                            img={Guilherme}
-                            link="https://www.linkedin.com/in/guilherme-romualdo-290641152/"
+                            title="What we believe!"
+                            description="Quality, Innovation, Frontline and Patient First."
+                            img={OurValues}
+                            link="https://medcloud.link/careers.html"
                         />
                     </Grid>
                 </Zoom>
@@ -93,7 +93,7 @@ function HomePage() {
                         <Cards
                             className={classes.cards}
                             title="Our mission"
-                            description="Provide innovative and quality solutions aimed at the safety of patients and professionals working in health services."
+                            description="Accelerate the transition of clinics and hospitals to the cloud and therefore improving the journey experience of millions of patients."
                             img={Doctor}
                             link="https://www.Medcloud.com.br/a-Medcloud"
                         />
