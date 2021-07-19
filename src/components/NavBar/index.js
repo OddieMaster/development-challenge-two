@@ -13,7 +13,7 @@ import {
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import MenuIcon from "@material-ui/icons/Menu";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import medClean from "../../assets/medClean.png";
+import Medcloud from "../../assets/medcloud.svg";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
@@ -23,14 +23,15 @@ const useStyles = makeStyles((theme) => ({
     grow: {
         flexGrow: "1",
     },
+
     appBar: {
         background: "  rgba(0,0,0,0.1)",
     },
     toolbar: {
         borderBottom: `1px solid ${theme.palette.divider}`,
-        background: "  rgba(0,0,0,0.1)",
+        background: "white",
         alignContent: "center",
-        padding: "0px 100px 0px 100px",
+        padding: "0px 100px 0px 40px",
         [theme.breakpoints.down("lg")]: {
             padding: "0px 40px 0px 25px",
         },
@@ -48,30 +49,32 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "16px",
         fontWeight: "500",
         fontFamily: "'Dosis'",
-        color: "white",
+        color: "#757575;",
         textTransform: "uppercase",
         textDecoration: "none !important",
         position: "relative",
         display: "block",
         "&:hover": {
-            color: "rgba(255, 255, 255, 0.5) !important",
+            color: "black !important",
+        },
+        [theme.breakpoints.down("425")]: {
+            color: "white",
         },
     },
 
     VertIcon: {
-        color: "white",
+        color: "#757575",
         [theme.breakpoints.down("sm")]: {
             justifyContent: "flex-end",
         },
     },
 
     IconButton: {
-        backgroundColor: "white",
+        backgroundColor: "#ebebeb",
         padding: "15px",
         marginLeft: "10px",
         "&:hover": {
             boxShadow: " 0 0 10px #00a8ff",
-            color: "#fff;",
             fontSize: 175,
         },
     },
@@ -149,7 +152,7 @@ function NavBar(props) {
         },
         {
             id: 6,
-            href: "https://www.medclean.com.br/",
+            href: "https://www.medcloud.com.br/",
             title: "Official Website",
         },
     ];
@@ -161,7 +164,7 @@ function NavBar(props) {
                     {isMobile ? (
                         <>
                             <Link href="">
-                                <img src={medClean} alt="logo" />
+                                <img src={Medcloud} alt="logo" />
                             </Link>
                             <Container className={classes.containerButtons}>
                                 <IconButton
@@ -233,7 +236,7 @@ function NavBar(props) {
                                     <MenuItem onClick={handleClose2}>
                                         <IconButton
                                             className={classes.IconButton}
-                                            href="https://www.facebook.com/MedcleanBR/"
+                                            href="https://www.facebook.com/MedcloudBR/"
                                             target="_blank"
                                             rel="noopener"
                                             color="primary"
@@ -245,7 +248,7 @@ function NavBar(props) {
                                     <MenuItem onClick={handleClose2}>
                                         <IconButton
                                             className={classes.IconButton}
-                                            href="https://www.instagram.com/medclean_br/"
+                                            href="https://www.instagram.com/Medcloud_br/"
                                             target="_blank"
                                             rel="noopener"
                                             color="secondary"
@@ -257,7 +260,7 @@ function NavBar(props) {
                                     <MenuItem onClick={handleClose2}>
                                         <IconButton
                                             className={classes.IconButton}
-                                            href="https://br.linkedin.com/company/medclean"
+                                            href="https://br.linkedin.com/company/Medcloud"
                                             target="_blank"
                                             rel="noopener"
                                             color="inherit"
@@ -275,7 +278,7 @@ function NavBar(props) {
                             {isMatch ? (
                                 <>
                                     <Link href="">
-                                        <img src={medClean} alt="logo" />
+                                        <img src={Medcloud} alt="Medcloud" />
                                     </Link>
                                     <Container
                                         className={classes.containerButtons}
@@ -321,7 +324,7 @@ function NavBar(props) {
                                         <MenuItem onClick={handleClose}>
                                             <IconButton
                                                 className={classes.IconButton}
-                                                href="https://www.facebook.com/MedcleanBR/"
+                                                href="https://www.facebook.com/MedcloudBR/"
                                                 target="_blank"
                                                 rel="noopener"
                                                 color="primary"
@@ -333,7 +336,7 @@ function NavBar(props) {
                                         <MenuItem onClick={handleClose}>
                                             <IconButton
                                                 className={classes.IconButton}
-                                                href="https://www.instagram.com/medclean_br/"
+                                                href="https://www.instagram.com/Medcloud_br/"
                                                 target="_blank"
                                                 rel="noopener"
                                                 color="secondary"
@@ -345,7 +348,7 @@ function NavBar(props) {
                                         <MenuItem onClick={handleClose}>
                                             <IconButton
                                                 className={classes.IconButton}
-                                                href="https://br.linkedin.com/company/medclean"
+                                                href="https://br.linkedin.com/company/Medcloud"
                                                 target="_blank"
                                                 rel="noopener"
                                                 color="inherit"
@@ -363,7 +366,7 @@ function NavBar(props) {
                                 <>
                                     {" "}
                                     <Link href="">
-                                        <img src={medClean} alt="logo" />
+                                        <img src={Medcloud} alt="logo" />
                                     </Link>
                                     <Container
                                         className={classes.containerButtons}
@@ -383,7 +386,7 @@ function NavBar(props) {
                                     <Container className={classes.container}>
                                         <IconButton
                                             className={classes.IconButton}
-                                            href="https://www.facebook.com/MedcleanBR/"
+                                            href="https://www.facebook.com/MedcloudBR/"
                                             target="_blank"
                                             rel="noopener"
                                             color="primary"
@@ -394,7 +397,7 @@ function NavBar(props) {
 
                                         <IconButton
                                             className={classes.IconButton}
-                                            href="https://www.instagram.com/medclean_br/"
+                                            href="https://www.instagram.com/Medcloud_br/"
                                             target="_blank"
                                             rel="noopener"
                                             color="secondary"
@@ -405,7 +408,7 @@ function NavBar(props) {
 
                                         <IconButton
                                             className={classes.IconButton}
-                                            href="https://br.linkedin.com/company/medclean"
+                                            href="https://br.linkedin.com/company/Medcloud"
                                             target="_blank"
                                             rel="noopener"
                                             color="inherit"

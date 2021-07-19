@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Cards from "../../components/Cards";
 import { Box, Grid, Typography, Zoom } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import MedClean from "../../assets/background.png";
+import Medcloud from "../../assets/background.png";
 import Guilherme from "../../assets/guilherme.jpg";
 import Doctor from "../../assets/doctor.jpg";
 
@@ -64,10 +64,10 @@ function HomePage() {
                     <Grid item xs={"auto"} sm={"auto"}>
                         <Cards
                             className={classes.cards}
-                            title="About MedClean"
-                            description="Medclean is a manufacturer of single-use disposables in Medical Grade SMS Nonwovens and a distributor of products that work in the cleaning, decontamination and conservation..."
-                            img={MedClean}
-                            link="https://www.medclean.com.br/a-medclean"
+                            title="About Medcloud"
+                            description="Medcloud is a manufacturer of single-use disposables in Medical Grade SMS Nonwovens and a distributor of products that work in the cleaning, decontamination and conservation..."
+                            img={Medcloud}
+                            link="https://www.Medcloud.com.br/a-Medcloud"
                         />
                     </Grid>
                 </Zoom>
@@ -95,7 +95,7 @@ function HomePage() {
                             title="Our mission"
                             description="Provide innovative and quality solutions aimed at the safety of patients and professionals working in health services."
                             img={Doctor}
-                            link="https://www.medclean.com.br/a-medclean"
+                            link="https://www.Medcloud.com.br/a-Medcloud"
                         />
                     </Grid>
                 </Zoom>

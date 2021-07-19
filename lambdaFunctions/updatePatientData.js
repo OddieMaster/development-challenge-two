@@ -48,7 +48,7 @@ exports.handler = async (event, context) => {
     responseBody = JSON.stringify(data);
     statusCode = 204;
   } catch(err) {
-    responseBody = `Unable to update product: ${err}`;
+    responseBody = `Unable to update patient: ${err}`;
     statusCode = 403;
   }
 

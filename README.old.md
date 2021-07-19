@@ -33,6 +33,6 @@ Medcloud's challenge for the general development internship vacancy.
 
 ## Delivery
 
-You MUST fork this repository to your own account and push you code to it. When you finish it, you must send a email to cv@medcloud.com.br with your curriculum, fork and how many time you managed to complete the challenge.
+You MUST fork this repository to your own account and push you code to it. When you finish it, you must send a email to cv@Medcloud.com.br with your curriculum, fork and how many time you managed to complete the challenge.
 
-Good luck! Any doubts, feel free to send an email to cv@medcloud.com.br.
+Good luck! Any doubts, feel free to send an email to cv@Medcloud.com.br.
